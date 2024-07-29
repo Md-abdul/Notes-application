@@ -84,7 +84,7 @@ const AddNote = ({ isOpen, onClose, onSave }) => {
 AddNote.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired, // Add this prop
+  onSave: PropTypes.func.isRequired, 
 };
 
 export default AddNote;

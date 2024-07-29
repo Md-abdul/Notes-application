@@ -48,7 +48,6 @@ const SIDEBAR_ITEMS = [
 function Sidebar({ isCollapsed, setIsCollapsed, activeTab, setActiveTab }) {
   const [userDetials, setUserDetials] = useState(null);
   const navigate = useNavigate();
-  // const sidebarBg = useColorModeValue("gray.50", "gray.800");
 
   const fetchDataUser = async () => {
     auth.onAuthStateChanged(async (user) => {
@@ -90,7 +89,6 @@ function Sidebar({ isCollapsed, setIsCollapsed, activeTab, setActiveTab }) {
         boxShadow="md"
         position="relative"
       >
-        {/* User Profile Section */}
 
         {userDetials ? (
           <Flex
@@ -142,7 +140,6 @@ function Sidebar({ isCollapsed, setIsCollapsed, activeTab, setActiveTab }) {
           />
         ))}
 
-        {/* Logout Button */}
         <Flex
           align="center"
           justify="center"
