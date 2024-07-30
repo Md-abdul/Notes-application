@@ -3,11 +3,17 @@ import { Box, Button, Center, Grid, Text } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import AddNote from "./AddNote";
 import NoteCard from "./NoteCard";
-import { db } from "../Components/firebaseConfig"; 
-import { collection, getDocs, deleteDoc, doc, updateDoc, addDoc } from "firebase/firestore";
+import { db } from "../Components/firebaseConfig";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  updateDoc,
+  addDoc,
+} from "firebase/firestore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 function MainContent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,12 +39,13 @@ function MainContent() {
     toast.success("Note deleted successfully");
   };
 
-
   const handleSave = async (newNote) => {
     if (currentNote) {
       const noteRef = doc(db, "notes", currentNote.id);
       await updateDoc(noteRef, newNote);
-      setNotes(notes.map((n) => (n.id === currentNote.id ? { ...n, ...newNote } : n)));
+      setNotes(
+        notes.map((n) => (n.id === currentNote.id ? { ...n, ...newNote } : n))
+      );
       toast.success("Note updated successfully");
     } else {
       const docRef = await addDoc(collection(db, "notes"), newNote);
@@ -51,7 +58,11 @@ function MainContent() {
 
   return (
     <Box className="main-content" p={4} position="relative">
-      <Grid templateColumns="repeat(3, 1fr)" gap={6} mt={4}>
+      <Grid
+        templateColumns={["1fr", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
+        gap={6}
+        mt={4}
+      >
         {notes.length === 0 ? (
           <Center>
             <Text fontSize={"2xl"} fontWeight={"bold"}>
@@ -60,11 +71,7 @@ function MainContent() {
           </Center>
         ) : (
           notes.map((note) => (
-            <NoteCard
-              key={note.id}
-              note={note}
-              onDelete={handleDelete}
-            />
+            <NoteCard key={note.id} note={note} onDelete={handleDelete} />
           ))
         )}
       </Grid>
@@ -80,7 +87,12 @@ function MainContent() {
       >
         Add Note
       </Button>
-      <AddNote isOpen={isOpen} onClose={onClose} onSave={handleSave} initialData={currentNote} />
+      <AddNote
+        isOpen={isOpen}
+        onClose={onClose}
+        onSave={handleSave}
+        initialData={currentNote}
+      />
       <ToastContainer />
     </Box>
   );

@@ -17,7 +17,7 @@ import {
 import { DeleteIcon } from "@chakra-ui/icons";
 import PropTypes from "prop-types";
 import "react-toastify/dist/ReactToastify.css";
-
+import "../Custom-Style/NoteCardGrid.css";
 const NoteCard = ({ note, onDelete }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -38,6 +38,7 @@ const NoteCard = ({ note, onDelete }) => {
         borderColor="gray.200"
         maxW="sm"
         mb={4}
+        className="note-card-grid"
       >
         <VStack align="start">
           <Text fontWeight="bold" fontSize="lg">
