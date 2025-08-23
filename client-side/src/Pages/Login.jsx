@@ -22,11 +22,12 @@ import { toast, ToastContainer } from "react-toastify";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // New state for loading
   const navigate = useNavigate();
 
   const handelLogin = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
 
@@ -38,6 +39,8 @@ const Login = () => {
       toast.error(error.message, {
         position: "top-center",
       });
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -133,6 +136,8 @@ const Login = () => {
                 fontWeight="bold"
                 fontSize="sm"
                 type="submit"
+                isLoading={loading}
+                loadingText="Signing In" // Optional: Customize the loading text
               >
                 Sign In
               </Button>
